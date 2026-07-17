@@ -4,72 +4,24 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
 <pnml>
   <net type="http://www.informatik.hu-berlin.de/top/pntd/ptNetb" id="PetriNet">
     <name>
-      <text>Alex - Rete di Petri (generata)</text>
+      <text>Bob - Rete di Petri (generata)</text>
     </name>
 
     <place id="p_snodo">
       <name>
-        <text>&lt;html&gt;Inizio processo /&lt;br&gt;Manutenzione&lt;br&gt;avvenuta con&lt;br&gt;successo? (No)&lt;/html&gt;</text>
+        <text>&lt;html&gt;Accetta proposta /&lt;br&gt;Proposta accettata&lt;/html&gt;</text>
         <graphics>
-          <offset x="360" y="420"/>
+          <offset x="1860" y="365"/>
         </graphics>
       </name>
       <graphics>
-        <position x="340" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-    </place>
-    <place id="p_tipo_di_risposta_appuntamento_annullato">
-      <name>
-        <text>&lt;html&gt;Tipo di risposta? /&lt;br&gt;Appuntamento&lt;br&gt;annullato?&lt;/html&gt;</text>
-        <graphics>
-          <offset x="960" y="365"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="940" y="315"/>
+        <position x="1840" y="315"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
     <place id="p_snodo_2">
       <name>
-        <text>&lt;html&gt;Tipo di risposta?&lt;br&gt;(Proposta ricevuta)&lt;br&gt;/&lt;br&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
-        <graphics>
-          <offset x="1260" y="475"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1240" y="425"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-    </place>
-    <place id="p_proposta_accettabile">
-      <name>
-        <text>&lt;html&gt;Proposta&lt;br&gt;accettabile?&lt;/html&gt;</text>
-        <graphics>
-          <offset x="1560" y="420"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1540" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-    </place>
-    <place id="p_snodo_3">
-      <name>
-        <text>&lt;html&gt;Appuntamento&lt;br&gt;annullato? (Si) /&lt;br&gt;Comunica luogo&lt;br&gt;appuntamento /&lt;br&gt;Ricevi annullamento&lt;/html&gt;</text>
-        <graphics>
-          <offset x="3060" y="420"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="3040" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-    </place>
-    <place id="p_snodo_4">
-      <name>
-        <text>&lt;html&gt;Accetta proposta /&lt;br&gt;Ricevi accettazione&lt;/html&gt;</text>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
         <graphics>
           <offset x="2160" y="365"/>
         </graphics>
@@ -79,27 +31,75 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <dimension x="40" y="40"/>
       </graphics>
     </place>
-    <place id="p_manutenzione_avvenuta_con_successo">
+    <place id="p_come_rispondo">
       <name>
-        <text>&lt;html&gt;Manutenzione&lt;br&gt;avvenuta con&lt;br&gt;successo?&lt;/html&gt;</text>
+        <text>Come rispondo?</text>
         <graphics>
-          <offset x="2760" y="475"/>
+          <offset x="660" y="365"/>
         </graphics>
       </name>
       <graphics>
-        <position x="2740" y="425"/>
+        <position x="640" y="315"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_come_rispondo_2">
+      <name>
+        <text>Come rispondo?</text>
+        <graphics>
+          <offset x="1560" y="310"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1540" y="260"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_snodo_3">
+      <name>
+        <text>&lt;html&gt;Ricevi luogo&lt;br&gt;appuntamento /&lt;br&gt;Comunica&lt;br&gt;indisponibilitá /&lt;br&gt;Annulla appuntamento&lt;/html&gt;</text>
+        <graphics>
+          <offset x="2460" y="420"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2440" y="370"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_snodo_4">
+      <name>
+        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta /&lt;br&gt;Ricevi proposta&lt;/html&gt;</text>
+        <graphics>
+          <offset x="1260" y="310"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1240" y="260"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
     <place id="p_snodo_5">
       <name>
-        <text>&lt;html&gt;Invia controproposta&lt;br&gt;/ Invia nuova&lt;br&gt;proposta&lt;/html&gt;</text>
+        <text>&lt;html&gt;Proponi data e&lt;br&gt;tipologia&lt;br&gt;attrezzatura /&lt;br&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
         <graphics>
-          <offset x="1860" y="310"/>
+          <offset x="960" y="475"/>
         </graphics>
       </name>
       <graphics>
-        <position x="1840" y="260"/>
+        <position x="940" y="425"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_snodo_6">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;br&gt;(Manutenzione&lt;br&gt;fallita) / Inizio&lt;br&gt;processo&lt;/html&gt;</text>
+        <graphics>
+          <offset x="360" y="420"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="340" y="370"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
@@ -122,65 +122,104 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
       <name>
         <text>Fine</text>
         <graphics>
-          <offset x="3360" y="420"/>
+          <offset x="2760" y="420"/>
         </graphics>
       </name>
       <graphics>
-        <position x="3340" y="370"/>
+        <position x="2740" y="370"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
-    <place id="p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá">
+    <place id="p_delega_scelta_ricevi_proposta">
       <name>
-        <text>&lt;html&gt;Invia lista&lt;br&gt;disponibilitá -&gt;&lt;br&gt;Ricevi risposta&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <text>&lt;html&gt;Delega scelta -&gt;&lt;br&gt;Ricevi proposta&lt;/html&gt;</text>
         <graphics>
-          <offset x="660" y="365"/>
+          <offset x="960" y="365"/>
         </graphics>
       </name>
       <graphics>
-        <position x="640" y="315"/>
+        <position x="940" y="315"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
-    <place id="p_esegui_manutenzione_barca_comunica_esito_manutenzione">
+    <place id="p_fai_controproposta_controproposta_throw">
       <name>
-        <text>&lt;html&gt;Esegui manutenzione&lt;br&gt;barca -&gt; Comunica&lt;br&gt;esito manutenzione&lt;/html&gt;</text>
+        <text>&lt;html&gt;Fai controproposta&lt;br&gt;-&gt; CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
         <graphics>
-          <offset x="2460" y="365"/>
+          <offset x="1860" y="585"/>
         </graphics>
       </name>
       <graphics>
-        <position x="2440" y="315"/>
+        <position x="1840" y="535"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
-    <place id="p_ricevi_controproposta_valuta_controproposta_throw">
+    <place id="p_controproposta_throw_controproposta_catch">
       <name>
-        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta -&gt;&lt;br&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(throw) -&gt;&lt;br&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
         <graphics>
-          <offset x="2160" y="475"/>
+          <offset x="2160" y="585"/>
         </graphics>
       </name>
       <graphics>
-        <position x="2140" y="425"/>
+        <position x="2140" y="535"/>
         <dimension x="40" y="40"/>
       </graphics>
     </place>
-    <place id="p_valuta_controproposta_throw_valuta_controproposta_catch">
+    <transition id="t_ricevi_luogo_appuntamento">
       <name>
-        <text>&lt;html&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(throw) -&gt;&lt;br&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
+        <text>&lt;html&gt;Ricevi luogo&lt;br&gt;appuntamento&lt;/html&gt;</text>
         <graphics>
-          <offset x="2460" y="475"/>
+          <offset x="2310" y="420"/>
         </graphics>
       </name>
       <graphics>
-        <position x="2440" y="425"/>
+        <position x="2290" y="370"/>
         <dimension x="40" y="40"/>
       </graphics>
-    </place>
-    <transition id="t_ricevi_risposta_disponibilitá">
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_esito_manutenzione">
       <name>
-        <text>&lt;html&gt;Ricevi risposta&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
+        <graphics>
+          <offset x="2010" y="365"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1990" y="315"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_comunica_indisponibilitá">
+      <name>
+        <text>&lt;html&gt;Comunica&lt;br&gt;indisponibilitá&lt;/html&gt;</text>
+        <graphics>
+          <offset x="810" y="255"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="790" y="205"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_delega_scelta">
+      <name>
+        <text>Delega scelta</text>
         <graphics>
           <offset x="810" y="365"/>
         </graphics>
@@ -195,9 +234,77 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <orientation>1</orientation>
       </toolspecific>
     </transition>
-    <transition id="t_invia_lista_disponibilitá">
+    <transition id="t_proponi_data_e_tipologia_attrezzatura">
       <name>
-        <text>&lt;html&gt;Invia lista&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <text>&lt;html&gt;Proponi data e&lt;br&gt;tipologia&lt;br&gt;attrezzatura&lt;/html&gt;</text>
+        <graphics>
+          <offset x="810" y="475"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="790" y="425"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_valuta_proposta">
+      <name>
+        <text>Valuta proposta</text>
+        <graphics>
+          <offset x="1410" y="310"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1390" y="260"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_fine_processo">
+      <name>
+        <text>Fine processo</text>
+        <graphics>
+          <offset x="2610" y="420"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2590" y="370"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_controproposta_catch">
+      <name>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
+        <graphics>
+          <offset x="2310" y="640"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2290" y="590"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_lista_disponibilitá">
+      <name>
+        <text>&lt;html&gt;Ricevi lista&lt;br&gt;disponibilitá&lt;/html&gt;</text>
         <graphics>
           <offset x="510" y="365"/>
         </graphics>
@@ -229,128 +336,9 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <orientation>1</orientation>
       </toolspecific>
     </transition>
-    <transition id="t_valuta_controproposta_catch">
+    <transition id="t_ricevi_controproposta">
       <name>
-        <text>&lt;html&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2610" y="530"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="2590" y="480"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_comunica_luogo_appuntamento">
-      <name>
-        <text>&lt;html&gt;Comunica luogo&lt;br&gt;appuntamento&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2910" y="475"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="2890" y="425"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_fine_processo">
-      <name>
-        <text>Fine processo</text>
-        <graphics>
-          <offset x="3210" y="420"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="3190" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_esegui_manutenzione_barca">
-      <name>
-        <text>&lt;html&gt;Esegui manutenzione&lt;br&gt;barca&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2310" y="365"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="2290" y="315"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_comunica_esito_manutenzione">
-      <name>
-        <text>&lt;html&gt;Comunica esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2610" y="420"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="2590" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_accetta_proposta">
-      <name>
-        <text>Accetta proposta</text>
-        <graphics>
-          <offset x="1710" y="475"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1690" y="425"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_invia_controproposta">
-      <name>
-        <text>Invia controproposta</text>
-        <graphics>
-          <offset x="1710" y="365"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1690" y="315"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_invia_nuova_proposta">
-      <name>
-        <text>Invia nuova proposta</text>
+        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta&lt;/html&gt;</text>
         <graphics>
           <offset x="1110" y="365"/>
         </graphics>
@@ -365,111 +353,9 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <orientation>1</orientation>
       </toolspecific>
     </transition>
-    <transition id="t_valuta_data_proposta">
+    <transition id="t_ricevi_proposta">
       <name>
-        <text>Valuta data proposta</text>
-        <graphics>
-          <offset x="1410" y="420"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1390" y="370"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_ricevi_accettazione">
-      <name>
-        <text>Ricevi accettazione</text>
-        <graphics>
-          <offset x="2010" y="310"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1990" y="260"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_ricevi_annullamento">
-      <name>
-        <text>Ricevi annullamento</text>
-        <graphics>
-          <offset x="2010" y="200"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1990" y="150"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_ricevi_controproposta">
-      <name>
-        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2010" y="530"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1990" y="480"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_valuta_controproposta_throw">
-      <name>
-        <text>&lt;html&gt;VALUTA_CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
-        <graphics>
-          <offset x="2310" y="475"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="2290" y="425"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_tipo_di_risposta_proposta_ricevuta">
-      <name>
-        <text>&lt;html&gt;Tipo di risposta?&lt;br&gt;(Proposta ricevuta)&lt;/html&gt;</text>
-        <graphics>
-          <offset x="1110" y="475"/>
-        </graphics>
-      </name>
-      <graphics>
-        <position x="1090" y="425"/>
-        <dimension x="40" y="40"/>
-      </graphics>
-      <toolspecific tool="WoPeD" version="1.0">
-        <time>0</time>
-        <timeUnit>1</timeUnit>
-        <orientation>1</orientation>
-      </toolspecific>
-    </transition>
-    <transition id="t_appuntamento_annullato_si">
-      <name>
-        <text>&lt;html&gt;Appuntamento&lt;br&gt;annullato? (Si)&lt;/html&gt;</text>
+        <text>Ricevi proposta</text>
         <graphics>
           <offset x="1110" y="255"/>
         </graphics>
@@ -484,15 +370,100 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <orientation>1</orientation>
       </toolspecific>
     </transition>
-    <transition id="t_manutenzione_avvenuta_con_successo_no">
+    <transition id="t_fai_controproposta">
       <name>
-        <text>&lt;html&gt;Manutenzione&lt;br&gt;avvenuta con&lt;br&gt;successo? (No)&lt;/html&gt;</text>
+        <text>Fai controproposta</text>
         <graphics>
-          <offset x="2910" y="585"/>
+          <offset x="1710" y="640"/>
         </graphics>
       </name>
       <graphics>
-        <position x="2890" y="535"/>
+        <position x="1690" y="590"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_annulla_appuntamento">
+      <name>
+        <text>Annulla appuntamento</text>
+        <graphics>
+          <offset x="1710" y="200"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1690" y="150"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_controproposta_throw">
+      <name>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
+        <graphics>
+          <offset x="2010" y="585"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1990" y="535"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_accetta_proposta">
+      <name>
+        <text>Accetta proposta</text>
+        <graphics>
+          <offset x="1710" y="310"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1690" y="260"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_proposta_accettata">
+      <name>
+        <text>Proposta accettata</text>
+        <graphics>
+          <offset x="1110" y="475"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1090" y="425"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_esito_manutenzione_manutenzione_fallita">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;br&gt;(Manutenzione&lt;br&gt;fallita)&lt;/html&gt;</text>
+        <graphics>
+          <offset x="2310" y="530"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2290" y="480"/>
         <dimension x="40" y="40"/>
       </graphics>
       <toolspecific tool="WoPeD" version="1.0">
@@ -511,182 +482,172 @@ Compatibile con WoPeD (Workflow PetriNet Designer).-->
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a3" source="t_ricevi_risposta_disponibilitá" target="p_tipo_di_risposta_appuntamento_annullato">
+    <arc id="a3" source="p_snodo" target="t_ricevi_esito_manutenzione">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a4" source="t_invia_lista_disponibilitá" target="p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá">
+    <arc id="a4" source="p_snodo_2" target="t_ricevi_esito_manutenzione_manutenzione_fallita">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a5" source="p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá" target="t_ricevi_risposta_disponibilitá">
+    <arc id="a5" source="t_ricevi_esito_manutenzione_manutenzione_fallita" target="p_snodo_6">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a6" source="p_snodo" target="t_invia_lista_disponibilitá">
+    <arc id="a6" source="p_snodo_2" target="t_ricevi_luogo_appuntamento">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a7" source="t_inizio_processo" target="p_snodo">
+    <arc id="a7" source="t_ricevi_luogo_appuntamento" target="p_snodo_3">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a8" source="p_tipo_di_risposta_appuntamento_annullato" target="t_tipo_di_risposta_proposta_ricevuta">
+    <arc id="a8" source="t_ricevi_esito_manutenzione" target="p_snodo_2">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a9" source="t_tipo_di_risposta_proposta_ricevuta" target="p_snodo_2">
+    <arc id="a9" source="p_come_rispondo" target="t_proponi_data_e_tipologia_attrezzatura">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a10" source="p_tipo_di_risposta_appuntamento_annullato" target="t_invia_nuova_proposta">
+    <arc id="a10" source="p_come_rispondo" target="t_delega_scelta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a11" source="p_tipo_di_risposta_appuntamento_annullato" target="t_appuntamento_annullato_si">
+    <arc id="a11" source="p_come_rispondo" target="t_comunica_indisponibilitá">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a12" source="t_appuntamento_annullato_si" target="p_snodo_3">
+    <arc id="a12" source="t_comunica_indisponibilitá" target="p_snodo_3">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a13" source="p_snodo_2" target="t_valuta_data_proposta">
+    <arc id="a13" source="t_delega_scelta" target="p_delega_scelta_ricevi_proposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a14" source="t_valuta_controproposta_catch" target="p_snodo_2">
+    <arc id="a14" source="p_delega_scelta_ricevi_proposta" target="t_ricevi_proposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a15" source="p_proposta_accettabile" target="t_accetta_proposta">
+    <arc id="a15" source="t_proponi_data_e_tipologia_attrezzatura" target="p_snodo_5">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a16" source="p_proposta_accettabile" target="t_invia_controproposta">
+    <arc id="a16" source="t_valuta_proposta" target="p_come_rispondo_2">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a17" source="t_comunica_luogo_appuntamento" target="p_snodo_3">
+    <arc id="a17" source="p_come_rispondo_2" target="t_annulla_appuntamento">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a18" source="p_snodo_3" target="t_fine_processo">
+    <arc id="a18" source="p_come_rispondo_2" target="t_accetta_proposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a19" source="p_snodo_4" target="t_esegui_manutenzione_barca">
+    <arc id="a19" source="p_come_rispondo_2" target="t_fai_controproposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a20" source="t_esegui_manutenzione_barca" target="p_esegui_manutenzione_barca_comunica_esito_manutenzione">
+    <arc id="a20" source="p_snodo_3" target="t_fine_processo">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a21" source="p_esegui_manutenzione_barca_comunica_esito_manutenzione" target="t_comunica_esito_manutenzione">
+    <arc id="a21" source="p_snodo_4" target="t_valuta_proposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a22" source="t_comunica_esito_manutenzione" target="p_manutenzione_avvenuta_con_successo">
+    <arc id="a22" source="t_controproposta_catch" target="p_snodo_5">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a23" source="p_manutenzione_avvenuta_con_successo" target="t_manutenzione_avvenuta_con_successo_no">
+    <arc id="a23" source="p_snodo_6" target="t_ricevi_lista_disponibilitá">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a24" source="t_manutenzione_avvenuta_con_successo_no" target="p_snodo">
+    <arc id="a24" source="t_ricevi_lista_disponibilitá" target="p_come_rispondo">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a25" source="p_manutenzione_avvenuta_con_successo" target="t_comunica_luogo_appuntamento">
+    <arc id="a25" source="t_inizio_processo" target="p_snodo_6">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a26" source="t_accetta_proposta" target="p_snodo_4">
+    <arc id="a26" source="t_ricevi_controproposta" target="p_snodo_4">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a27" source="t_invia_controproposta" target="p_snodo_5">
+    <arc id="a27" source="t_ricevi_proposta" target="p_snodo_4">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a28" source="t_invia_nuova_proposta" target="p_snodo_5">
+    <arc id="a28" source="t_fai_controproposta" target="p_fai_controproposta_controproposta_throw">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a29" source="t_valuta_data_proposta" target="p_proposta_accettabile">
+    <arc id="a29" source="p_fai_controproposta_controproposta_throw" target="t_controproposta_throw">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a30" source="p_snodo_5" target="t_ricevi_accettazione">
+    <arc id="a30" source="t_annulla_appuntamento" target="p_snodo_3">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a31" source="p_snodo_5" target="t_ricevi_controproposta">
+    <arc id="a31" source="t_controproposta_throw" target="p_controproposta_throw_controproposta_catch">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a32" source="p_snodo_5" target="t_ricevi_annullamento">
+    <arc id="a32" source="p_controproposta_throw_controproposta_catch" target="t_controproposta_catch">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a33" source="t_ricevi_accettazione" target="p_snodo_4">
+    <arc id="a33" source="t_accetta_proposta" target="p_snodo">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a34" source="t_ricevi_annullamento" target="p_snodo_3">
+    <arc id="a34" source="p_snodo_5" target="t_proposta_accettata">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a35" source="t_ricevi_controproposta" target="p_ricevi_controproposta_valuta_controproposta_throw">
+    <arc id="a35" source="p_snodo_5" target="t_ricevi_controproposta">
       <inscription>
         <text>1</text>
       </inscription>
     </arc>
-    <arc id="a36" source="p_ricevi_controproposta_valuta_controproposta_throw" target="t_valuta_controproposta_throw">
-      <inscription>
-        <text>1</text>
-      </inscription>
-    </arc>
-    <arc id="a37" source="t_valuta_controproposta_throw" target="p_valuta_controproposta_throw_valuta_controproposta_catch">
-      <inscription>
-        <text>1</text>
-      </inscription>
-    </arc>
-    <arc id="a38" source="p_valuta_controproposta_throw_valuta_controproposta_catch" target="t_valuta_controproposta_catch">
+    <arc id="a36" source="t_proposta_accettata" target="p_snodo">
       <inscription>
         <text>1</text>
       </inscription>

@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Workflow system generato automaticamente (Alex + Bob + interfacce di collaboration).-->
+<pnml>
+  <net type="http://www.informatik.hu-berlin.de/top/pntd/ptNetb" id="PetriNet_System">
+    <name>
+      <text>Sistema Alex-Bob - Rete di Petri</text>
+    </name>
+    <place id="ax_p_snodo">
+      <name>
+        <text>Inizio processo / Manutenzione avvenuta con successo? (No)</text>
+        <graphics><offset x="660" y="860"/></graphics>
+      </name>
+      <graphics><position x="640" y="810"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_tipo_di_risposta_appuntamento_annullato">
+      <name>
+        <text>Tipo di risposta? / Appuntamento annullato?</text>
+        <graphics><offset x="1260" y="805"/></graphics>
+      </name>
+      <graphics><position x="1240" y="755"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_snodo_2">
+      <name>
+        <text>Tipo di risposta? (Proposta ricevuta) / VALUTA_CONTROPROPOSTA (catch)</text>
+        <graphics><offset x="1560" y="750"/></graphics>
+      </name>
+      <graphics><position x="1540" y="700"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_proposta_accettabile">
+      <name>
+        <text>Proposta accettabile?</text>
+        <graphics><offset x="1860" y="1025"/></graphics>
+      </name>
+      <graphics><position x="1840" y="975"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_snodo_3">
+      <name>
+        <text>Appuntamento annullato? (Si) / Comunica luogo appuntamento / Ricevi annullamento</text>
+        <graphics><offset x="5160" y="860"/></graphics>
+      </name>
+      <graphics><position x="5140" y="810"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_snodo_4">
+      <name>
+        <text>Accetta proposta / Ricevi accettazione</text>
+        <graphics><offset x="2160" y="1025"/></graphics>
+      </name>
+      <graphics><position x="2140" y="975"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_manutenzione_avvenuta_con_successo">
+      <name>
+        <text>Manutenzione avvenuta con successo?</text>
+        <graphics><offset x="2760" y="695"/></graphics>
+      </name>
+      <graphics><position x="2740" y="645"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_snodo_5">
+      <name>
+        <text>Invia controproposta / Invia nuova proposta</text>
+        <graphics><offset x="2160" y="695"/></graphics>
+      </name>
+      <graphics><position x="2140" y="645"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_inizio">
+      <name>
+        <text>Inizio</text>
+        <graphics><offset x="360" y="860"/></graphics>
+      </name>
+      <graphics><position x="340" y="810"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_fine">
+      <name>
+        <text>Fine</text>
+        <graphics><offset x="5460" y="970"/></graphics>
+      </name>
+      <graphics><position x="5440" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá">
+      <name>
+        <text>Invia lista disponibilitá -&gt; Ricevi risposta disponibilitá</text>
+        <graphics><offset x="960" y="970"/></graphics>
+      </name>
+      <graphics><position x="940" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_esegui_manutenzione_barca_comunica_esito_manutenzione">
+      <name>
+        <text>Esegui manutenzione barca -&gt; Comunica esito manutenzione</text>
+        <graphics><offset x="2460" y="970"/></graphics>
+      </name>
+      <graphics><position x="2440" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_ricevi_controproposta_valuta_controproposta_throw">
+      <name>
+        <text>Ricevi controproposta -&gt; VALUTA_CONTROPROPOSTA (throw)</text>
+        <graphics><offset x="5160" y="750"/></graphics>
+      </name>
+      <graphics><position x="5140" y="700"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="ax_p_valuta_controproposta_throw_valuta_controproposta_catch">
+      <name>
+        <text>VALUTA_CONTROPROPOSTA (throw) -&gt; VALUTA_CONTROPROPOSTA (catch)</text>
+        <graphics><offset x="5460" y="860"/></graphics>
+      </name>
+      <graphics><position x="5440" y="810"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo">
+      <name>
+        <text>&lt;html&gt;Accetta proposta /&lt;br&gt;Proposta accettata&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="1630"/></graphics>
+      </name>
+      <graphics><position x="4840" y="1580"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo_2">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
+        <graphics><offset x="3060" y="970"/></graphics>
+      </name>
+      <graphics><position x="3040" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_come_rispondo">
+      <name>
+        <text>Come rispondo?</text>
+        <graphics><offset x="3660" y="1300"/></graphics>
+      </name>
+      <graphics><position x="3640" y="1250"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_come_rispondo_2">
+      <name>
+        <text>Come rispondo?</text>
+        <graphics><offset x="4560" y="915"/></graphics>
+      </name>
+      <graphics><position x="4540" y="865"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo_3">
+      <name>
+        <text>&lt;html&gt;Ricevi luogo&lt;br&gt;appuntamento /&lt;br&gt;Comunica&lt;br&gt;indisponibilitá /&lt;br&gt;Annulla appuntamento&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="970"/></graphics>
+      </name>
+      <graphics><position x="4840" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo_4">
+      <name>
+        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta /&lt;br&gt;Ricevi proposta&lt;/html&gt;</text>
+        <graphics><offset x="4260" y="915"/></graphics>
+      </name>
+      <graphics><position x="4240" y="865"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo_5">
+      <name>
+        <text>&lt;html&gt;Proponi data e&lt;br&gt;tipologia&lt;br&gt;attrezzatura /&lt;br&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
+        <graphics><offset x="3960" y="1190"/></graphics>
+      </name>
+      <graphics><position x="3940" y="1140"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_snodo_6">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;br&gt;(Manutenzione&lt;br&gt;fallita) / Inizio&lt;br&gt;processo&lt;/html&gt;</text>
+        <graphics><offset x="3360" y="1245"/></graphics>
+      </name>
+      <graphics><position x="3340" y="1195"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_inizio">
+      <name>
+        <text>Inizio</text>
+        <graphics><offset x="360" y="970"/></graphics>
+      </name>
+      <graphics><position x="340" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_fine">
+      <name>
+        <text>Fine</text>
+        <graphics><offset x="5160" y="970"/></graphics>
+      </name>
+      <graphics><position x="5140" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_delega_scelta_ricevi_proposta">
+      <name>
+        <text>&lt;html&gt;Delega scelta -&gt;&lt;br&gt;Ricevi proposta&lt;/html&gt;</text>
+        <graphics><offset x="3960" y="970"/></graphics>
+      </name>
+      <graphics><position x="3940" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_fai_controproposta_controproposta_throw">
+      <name>
+        <text>&lt;html&gt;Fai controproposta&lt;br&gt;-&gt; CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="1080"/></graphics>
+      </name>
+      <graphics><position x="4840" y="1030"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="bb_p_controproposta_throw_controproposta_catch">
+      <name>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(throw) -&gt;&lt;br&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
+        <graphics><offset x="5160" y="1080"/></graphics>
+      </name>
+      <graphics><position x="5140" y="1030"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_1_ricevi_risposta_disponibilita">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi risposta&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <graphics><offset x="3960" y="1740"/></graphics>
+      </name>
+      <graphics><position x="3940" y="1690"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_2_ricevi_lista_disponibilita">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi lista&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <graphics><offset x="960" y="1080"/></graphics>
+      </name>
+      <graphics><position x="940" y="1030"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_3_ricevi_luogo_appuntamento">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi luogo&lt;br&gt;appuntamento&lt;/html&gt;</text>
+        <graphics><offset x="3060" y="640"/></graphics>
+      </name>
+      <graphics><position x="3040" y="590"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_4_ricevi_esito_manutenzione">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
+        <graphics><offset x="2760" y="1245"/></graphics>
+      </name>
+      <graphics><position x="2740" y="1195"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_5_proposta_accettata">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Proposta accettata&lt;/html&gt;</text>
+        <graphics><offset x="2160" y="1355"/></graphics>
+      </name>
+      <graphics><position x="2140" y="1305"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_6_ricevi_controproposta">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi&lt;br&gt;controproposta&lt;/html&gt;</text>
+        <graphics><offset x="2160" y="805"/></graphics>
+      </name>
+      <graphics><position x="2140" y="755"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_7_ricevi_proposta">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi proposta&lt;/html&gt;</text>
+        <graphics><offset x="1560" y="970"/></graphics>
+      </name>
+      <graphics><position x="1540" y="920"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_8_ricevi_accettazione">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi accettazione&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="1410"/></graphics>
+      </name>
+      <graphics><position x="4840" y="1360"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_9_ricevi_controproposta">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi&lt;br&gt;controproposta&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="420"/></graphics>
+      </name>
+      <graphics><position x="4840" y="370"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_int_10_ricevi_annullamento">
+      <name>
+        <text>&lt;html&gt;[interfaccia] -&gt;&lt;br&gt;Ricevi annullamento&lt;/html&gt;</text>
+        <graphics><offset x="4860" y="860"/></graphics>
+      </name>
+      <graphics><position x="4840" y="810"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <place id="p_sistema_i">
+      <name>
+        <text>Inizio sistema</text>
+        <graphics><offset x="60" y="915"/></graphics>
+      </name>
+      <graphics><position x="40" y="865"/><dimension x="40" y="40"/></graphics>
+      <initialMarking><text>1</text></initialMarking>
+    </place>
+    <place id="p_sistema_o">
+      <name>
+        <text>Fine sistema</text>
+        <graphics><offset x="5760" y="915"/></graphics>
+      </name>
+      <graphics><position x="5740" y="865"/><dimension x="40" y="40"/></graphics>
+    </place>
+    <transition id="ax_t_ricevi_risposta_disponibilitá">
+      <name>
+        <text>Ricevi risposta disponibilitá</text>
+        <graphics><offset x="1110" y="970"/></graphics>
+      </name>
+      <graphics><position x="1090" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_invia_lista_disponibilitá">
+      <name>
+        <text>Invia lista disponibilitá</text>
+        <graphics><offset x="810" y="1025"/></graphics>
+      </name>
+      <graphics><position x="790" y="975"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_inizio_processo">
+      <name>
+        <text>Inizio processo</text>
+        <graphics><offset x="510" y="860"/></graphics>
+      </name>
+      <graphics><position x="490" y="810"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_valuta_controproposta_catch">
+      <name>
+        <text>VALUTA_CONTROPROPOSTA (catch)</text>
+        <graphics><offset x="5610" y="860"/></graphics>
+      </name>
+      <graphics><position x="5590" y="810"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_comunica_luogo_appuntamento">
+      <name>
+        <text>Comunica luogo appuntamento</text>
+        <graphics><offset x="2910" y="695"/></graphics>
+      </name>
+      <graphics><position x="2890" y="645"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_fine_processo">
+      <name>
+        <text>Fine processo</text>
+        <graphics><offset x="5310" y="915"/></graphics>
+      </name>
+      <graphics><position x="5290" y="865"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_esegui_manutenzione_barca">
+      <name>
+        <text>Esegui manutenzione barca</text>
+        <graphics><offset x="2310" y="970"/></graphics>
+      </name>
+      <graphics><position x="2290" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_comunica_esito_manutenzione">
+      <name>
+        <text>Comunica esito manutenzione</text>
+        <graphics><offset x="2610" y="970"/></graphics>
+      </name>
+      <graphics><position x="2590" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_accetta_proposta">
+      <name>
+        <text>Accetta proposta</text>
+        <graphics><offset x="2010" y="1190"/></graphics>
+      </name>
+      <graphics><position x="1990" y="1140"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_invia_controproposta">
+      <name>
+        <text>Invia controproposta</text>
+        <graphics><offset x="2010" y="860"/></graphics>
+      </name>
+      <graphics><position x="1990" y="810"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_invia_nuova_proposta">
+      <name>
+        <text>Invia nuova proposta</text>
+        <graphics><offset x="1410" y="915"/></graphics>
+      </name>
+      <graphics><position x="1390" y="865"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_valuta_data_proposta">
+      <name>
+        <text>Valuta data proposta</text>
+        <graphics><offset x="1710" y="1025"/></graphics>
+      </name>
+      <graphics><position x="1690" y="975"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_ricevi_accettazione">
+      <name>
+        <text>Ricevi accettazione</text>
+        <graphics><offset x="5010" y="1355"/></graphics>
+      </name>
+      <graphics><position x="4990" y="1305"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_ricevi_annullamento">
+      <name>
+        <text>Ricevi annullamento</text>
+        <graphics><offset x="5010" y="915"/></graphics>
+      </name>
+      <graphics><position x="4990" y="865"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_ricevi_controproposta">
+      <name>
+        <text>Ricevi controproposta</text>
+        <graphics><offset x="5010" y="585"/></graphics>
+      </name>
+      <graphics><position x="4990" y="535"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_valuta_controproposta_throw">
+      <name>
+        <text>VALUTA_CONTROPROPOSTA (throw)</text>
+        <graphics><offset x="5310" y="805"/></graphics>
+      </name>
+      <graphics><position x="5290" y="755"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_tipo_di_risposta_proposta_ricevuta">
+      <name>
+        <text>Tipo di risposta? (Proposta ricevuta)</text>
+        <graphics><offset x="1410" y="805"/></graphics>
+      </name>
+      <graphics><position x="1390" y="755"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_appuntamento_annullato_si">
+      <name>
+        <text>Appuntamento annullato? (Si)</text>
+        <graphics><offset x="1410" y="585"/></graphics>
+      </name>
+      <graphics><position x="1390" y="535"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="ax_t_manutenzione_avvenuta_con_successo_no">
+      <name>
+        <text>Manutenzione avvenuta con successo? (No)</text>
+        <graphics><offset x="2910" y="475"/></graphics>
+      </name>
+      <graphics><position x="2890" y="425"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_luogo_appuntamento">
+      <name>
+        <text>&lt;html&gt;Ricevi luogo&lt;br&gt;appuntamento&lt;/html&gt;</text>
+        <graphics><offset x="3210" y="640"/></graphics>
+      </name>
+      <graphics><position x="3190" y="590"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_esito_manutenzione">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;/html&gt;</text>
+        <graphics><offset x="2910" y="1245"/></graphics>
+      </name>
+      <graphics><position x="2890" y="1195"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_comunica_indisponibilitá">
+      <name>
+        <text>&lt;html&gt;Comunica&lt;br&gt;indisponibilitá&lt;/html&gt;</text>
+        <graphics><offset x="3810" y="1300"/></graphics>
+      </name>
+      <graphics><position x="3790" y="1250"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_delega_scelta">
+      <name>
+        <text>Delega scelta</text>
+        <graphics><offset x="3810" y="1080"/></graphics>
+      </name>
+      <graphics><position x="3790" y="1030"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_proponi_data_e_tipologia_attrezzatura">
+      <name>
+        <text>&lt;html&gt;Proponi data e&lt;br&gt;tipologia&lt;br&gt;attrezzatura&lt;/html&gt;</text>
+        <graphics><offset x="3810" y="1410"/></graphics>
+      </name>
+      <graphics><position x="3790" y="1360"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_valuta_proposta">
+      <name>
+        <text>Valuta proposta</text>
+        <graphics><offset x="4410" y="915"/></graphics>
+      </name>
+      <graphics><position x="4390" y="865"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_fine_processo">
+      <name>
+        <text>Fine processo</text>
+        <graphics><offset x="5010" y="1025"/></graphics>
+      </name>
+      <graphics><position x="4990" y="975"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_controproposta_catch">
+      <name>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(catch)&lt;/html&gt;</text>
+        <graphics><offset x="5310" y="1135"/></graphics>
+      </name>
+      <graphics><position x="5290" y="1085"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_lista_disponibilitá">
+      <name>
+        <text>&lt;html&gt;Ricevi lista&lt;br&gt;disponibilitá&lt;/html&gt;</text>
+        <graphics><offset x="3510" y="1300"/></graphics>
+      </name>
+      <graphics><position x="3490" y="1250"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_inizio_processo">
+      <name>
+        <text>Inizio processo</text>
+        <graphics><offset x="510" y="970"/></graphics>
+      </name>
+      <graphics><position x="490" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_controproposta">
+      <name>
+        <text>&lt;html&gt;Ricevi&lt;br&gt;controproposta&lt;/html&gt;</text>
+        <graphics><offset x="4110" y="860"/></graphics>
+      </name>
+      <graphics><position x="4090" y="810"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_proposta">
+      <name>
+        <text>Ricevi proposta</text>
+        <graphics><offset x="4110" y="970"/></graphics>
+      </name>
+      <graphics><position x="4090" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_fai_controproposta">
+      <name>
+        <text>Fai controproposta</text>
+        <graphics><offset x="4710" y="695"/></graphics>
+      </name>
+      <graphics><position x="4690" y="645"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_annulla_appuntamento">
+      <name>
+        <text>Annulla appuntamento</text>
+        <graphics><offset x="4710" y="805"/></graphics>
+      </name>
+      <graphics><position x="4690" y="755"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_controproposta_throw">
+      <name>
+        <text>&lt;html&gt;CONTROPROPOSTA&lt;br&gt;(throw)&lt;/html&gt;</text>
+        <graphics><offset x="5010" y="1135"/></graphics>
+      </name>
+      <graphics><position x="4990" y="1085"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_accetta_proposta">
+      <name>
+        <text>Accetta proposta</text>
+        <graphics><offset x="4710" y="1355"/></graphics>
+      </name>
+      <graphics><position x="4690" y="1305"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_proposta_accettata">
+      <name>
+        <text>Proposta accettata</text>
+        <graphics><offset x="4110" y="1630"/></graphics>
+      </name>
+      <graphics><position x="4090" y="1580"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="bb_t_ricevi_esito_manutenzione_manutenzione_fallita">
+      <name>
+        <text>&lt;html&gt;Ricevi esito&lt;br&gt;manutenzione&lt;br&gt;(Manutenzione&lt;br&gt;fallita)&lt;/html&gt;</text>
+        <graphics><offset x="3210" y="1190"/></graphics>
+      </name>
+      <graphics><position x="3190" y="1140"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="t_sistema_i">
+      <name>
+        <text>Avvio sistema</text>
+        <graphics><offset x="210" y="915"/></graphics>
+      </name>
+      <graphics><position x="190" y="865"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <transition id="t_sistema_o">
+      <name>
+        <text>Fine sistema</text>
+        <graphics><offset x="5610" y="970"/></graphics>
+      </name>
+      <graphics><position x="5590" y="920"/><dimension x="40" y="40"/></graphics>
+      <toolspecific tool="WoPeD" version="1.0"><time>0</time><timeUnit>1</timeUnit><orientation>1</orientation></toolspecific>
+    </transition>
+    <arc id="sysa1" source="ax_p_inizio" target="ax_t_inizio_processo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa2" source="ax_t_fine_processo" target="ax_p_fine"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa3" source="ax_t_ricevi_risposta_disponibilitá" target="ax_p_tipo_di_risposta_appuntamento_annullato"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa4" source="ax_t_invia_lista_disponibilitá" target="ax_p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa5" source="ax_p_invia_lista_disponibilitá_ricevi_risposta_disponibilitá" target="ax_t_ricevi_risposta_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa6" source="ax_p_snodo" target="ax_t_invia_lista_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa7" source="ax_t_inizio_processo" target="ax_p_snodo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa8" source="ax_p_tipo_di_risposta_appuntamento_annullato" target="ax_t_tipo_di_risposta_proposta_ricevuta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa9" source="ax_t_tipo_di_risposta_proposta_ricevuta" target="ax_p_snodo_2"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa10" source="ax_p_tipo_di_risposta_appuntamento_annullato" target="ax_t_invia_nuova_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa11" source="ax_p_tipo_di_risposta_appuntamento_annullato" target="ax_t_appuntamento_annullato_si"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa12" source="ax_t_appuntamento_annullato_si" target="ax_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa13" source="ax_p_snodo_2" target="ax_t_valuta_data_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa14" source="ax_t_valuta_controproposta_catch" target="ax_p_snodo_2"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa15" source="ax_p_proposta_accettabile" target="ax_t_accetta_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa16" source="ax_p_proposta_accettabile" target="ax_t_invia_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa17" source="ax_t_comunica_luogo_appuntamento" target="ax_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa18" source="ax_p_snodo_3" target="ax_t_fine_processo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa19" source="ax_p_snodo_4" target="ax_t_esegui_manutenzione_barca"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa20" source="ax_t_esegui_manutenzione_barca" target="ax_p_esegui_manutenzione_barca_comunica_esito_manutenzione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa21" source="ax_p_esegui_manutenzione_barca_comunica_esito_manutenzione" target="ax_t_comunica_esito_manutenzione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa22" source="ax_t_comunica_esito_manutenzione" target="ax_p_manutenzione_avvenuta_con_successo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa23" source="ax_p_manutenzione_avvenuta_con_successo" target="ax_t_manutenzione_avvenuta_con_successo_no"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa24" source="ax_t_manutenzione_avvenuta_con_successo_no" target="ax_p_snodo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa25" source="ax_p_manutenzione_avvenuta_con_successo" target="ax_t_comunica_luogo_appuntamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa26" source="ax_t_accetta_proposta" target="ax_p_snodo_4"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa27" source="ax_t_invia_controproposta" target="ax_p_snodo_5"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa28" source="ax_t_invia_nuova_proposta" target="ax_p_snodo_5"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa29" source="ax_t_valuta_data_proposta" target="ax_p_proposta_accettabile"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa30" source="ax_p_snodo_5" target="ax_t_ricevi_accettazione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa31" source="ax_p_snodo_5" target="ax_t_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa32" source="ax_p_snodo_5" target="ax_t_ricevi_annullamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa33" source="ax_t_ricevi_accettazione" target="ax_p_snodo_4"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa34" source="ax_t_ricevi_annullamento" target="ax_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa35" source="ax_t_ricevi_controproposta" target="ax_p_ricevi_controproposta_valuta_controproposta_throw"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa36" source="ax_p_ricevi_controproposta_valuta_controproposta_throw" target="ax_t_valuta_controproposta_throw"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa37" source="ax_t_valuta_controproposta_throw" target="ax_p_valuta_controproposta_throw_valuta_controproposta_catch"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa38" source="ax_p_valuta_controproposta_throw_valuta_controproposta_catch" target="ax_t_valuta_controproposta_catch"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa39" source="bb_p_inizio" target="bb_t_inizio_processo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa40" source="bb_t_fine_processo" target="bb_p_fine"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa41" source="bb_p_snodo" target="bb_t_ricevi_esito_manutenzione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa42" source="bb_p_snodo_2" target="bb_t_ricevi_esito_manutenzione_manutenzione_fallita"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa43" source="bb_t_ricevi_esito_manutenzione_manutenzione_fallita" target="bb_p_snodo_6"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa44" source="bb_p_snodo_2" target="bb_t_ricevi_luogo_appuntamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa45" source="bb_t_ricevi_luogo_appuntamento" target="bb_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa46" source="bb_t_ricevi_esito_manutenzione" target="bb_p_snodo_2"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa47" source="bb_p_come_rispondo" target="bb_t_proponi_data_e_tipologia_attrezzatura"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa48" source="bb_p_come_rispondo" target="bb_t_delega_scelta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa49" source="bb_p_come_rispondo" target="bb_t_comunica_indisponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa50" source="bb_t_comunica_indisponibilitá" target="bb_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa51" source="bb_t_delega_scelta" target="bb_p_delega_scelta_ricevi_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa52" source="bb_p_delega_scelta_ricevi_proposta" target="bb_t_ricevi_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa53" source="bb_t_proponi_data_e_tipologia_attrezzatura" target="bb_p_snodo_5"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa54" source="bb_t_valuta_proposta" target="bb_p_come_rispondo_2"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa55" source="bb_p_come_rispondo_2" target="bb_t_annulla_appuntamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa56" source="bb_p_come_rispondo_2" target="bb_t_accetta_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa57" source="bb_p_come_rispondo_2" target="bb_t_fai_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa58" source="bb_p_snodo_3" target="bb_t_fine_processo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa59" source="bb_p_snodo_4" target="bb_t_valuta_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa60" source="bb_t_controproposta_catch" target="bb_p_snodo_5"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa61" source="bb_p_snodo_6" target="bb_t_ricevi_lista_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa62" source="bb_t_ricevi_lista_disponibilitá" target="bb_p_come_rispondo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa63" source="bb_t_inizio_processo" target="bb_p_snodo_6"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa64" source="bb_t_ricevi_controproposta" target="bb_p_snodo_4"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa65" source="bb_t_ricevi_proposta" target="bb_p_snodo_4"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa66" source="bb_t_fai_controproposta" target="bb_p_fai_controproposta_controproposta_throw"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa67" source="bb_p_fai_controproposta_controproposta_throw" target="bb_t_controproposta_throw"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa68" source="bb_t_annulla_appuntamento" target="bb_p_snodo_3"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa69" source="bb_t_controproposta_throw" target="bb_p_controproposta_throw_controproposta_catch"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa70" source="bb_p_controproposta_throw_controproposta_catch" target="bb_t_controproposta_catch"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa71" source="bb_t_accetta_proposta" target="bb_p_snodo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa72" source="bb_p_snodo_5" target="bb_t_proposta_accettata"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa73" source="bb_p_snodo_5" target="bb_t_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa74" source="bb_t_proposta_accettata" target="bb_p_snodo"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa75" source="bb_t_proponi_data_e_tipologia_attrezzatura" target="p_int_1_ricevi_risposta_disponibilita"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa76" source="bb_t_delega_scelta" target="p_int_1_ricevi_risposta_disponibilita"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa77" source="bb_t_comunica_indisponibilitá" target="p_int_1_ricevi_risposta_disponibilita"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa78" source="p_int_1_ricevi_risposta_disponibilita" target="ax_t_ricevi_risposta_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa79" source="ax_t_invia_lista_disponibilitá" target="p_int_2_ricevi_lista_disponibilita"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa80" source="p_int_2_ricevi_lista_disponibilita" target="bb_t_ricevi_lista_disponibilitá"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa81" source="ax_t_comunica_luogo_appuntamento" target="p_int_3_ricevi_luogo_appuntamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa82" source="p_int_3_ricevi_luogo_appuntamento" target="bb_t_ricevi_luogo_appuntamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa83" source="ax_t_comunica_esito_manutenzione" target="p_int_4_ricevi_esito_manutenzione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa84" source="p_int_4_ricevi_esito_manutenzione" target="bb_t_ricevi_esito_manutenzione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa85" source="ax_t_accetta_proposta" target="p_int_5_proposta_accettata"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa86" source="p_int_5_proposta_accettata" target="bb_t_proposta_accettata"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa87" source="ax_t_invia_controproposta" target="p_int_6_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa88" source="p_int_6_ricevi_controproposta" target="bb_t_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa89" source="ax_t_invia_nuova_proposta" target="p_int_7_ricevi_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa90" source="p_int_7_ricevi_proposta" target="bb_t_ricevi_proposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa91" source="bb_t_accetta_proposta" target="p_int_8_ricevi_accettazione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa92" source="p_int_8_ricevi_accettazione" target="ax_t_ricevi_accettazione"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa93" source="bb_t_fai_controproposta" target="p_int_9_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa94" source="p_int_9_ricevi_controproposta" target="ax_t_ricevi_controproposta"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa95" source="bb_t_annulla_appuntamento" target="p_int_10_ricevi_annullamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa96" source="p_int_10_ricevi_annullamento" target="ax_t_ricevi_annullamento"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa97" source="p_sistema_i" target="t_sistema_i"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa98" source="t_sistema_i" target="ax_p_inizio"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa99" source="t_sistema_i" target="bb_p_inizio"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa100" source="ax_p_fine" target="t_sistema_o"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa101" source="bb_p_fine" target="t_sistema_o"><inscription><text>1</text></inscription></arc>
+    <arc id="sysa102" source="t_sistema_o" target="p_sistema_o"><inscription><text>1</text></inscription></arc>
+  </net>
+</pnml>
