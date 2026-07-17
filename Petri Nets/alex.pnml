@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created with Workflow PetriNet Designer Version 3.9.2 (woped.org)
+Manual editing may break compatibility.-->
+<pnml>
+  <net type="http://www.informatik.hu-berlin.de/top/pntd/ptNetb" id="PetriNet_Alex">
+    <name>
+      <text>Alex - Rete di Petri</text>
+    </name>
+    <place id="p_manutenzione_eseguita">
+      <name>
+        <text>Manutenzione eseguita</text>
+        <graphics>
+          <offset x="2020" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2000" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_disp_pronta">
+      <name>
+        <text>Pronto per inviare disponibilita</text>
+        <graphics>
+          <offset x="260" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="240" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_esito_comunicato">
+      <name>
+        <text>Esito manutenzione comunicato</text>
+        <graphics>
+          <offset x="2270" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2250" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_pre_fine">
+      <name>
+        <text>Pronto per terminare</text>
+        <graphics>
+          <offset x="2670" y="650"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2650" y="600"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_proposta_da_valutare">
+      <name>
+        <text>Proposta/controproposta da valutare</text>
+        <graphics>
+          <offset x="970" y="330"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="950" y="280"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_end">
+      <name>
+        <text>Fine</text>
+        <graphics>
+          <offset x="2920" y="650"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2900" y="600"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_attesa_bob">
+      <name>
+        <text>In attesa della risposta di Bob</text>
+        <graphics>
+          <offset x="1850" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1830" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_proposta_valutata">
+      <name>
+        <text>Proposta valutata</text>
+        <graphics>
+          <offset x="1310" y="330"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1290" y="280"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_link_controproposta">
+      <name>
+        <text>Link: VALUTA_CONTROPROPOSTA</text>
+        <graphics>
+          <offset x="2160" y="510"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2140" y="460"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_lista_inviata">
+      <name>
+        <text>Lista disponibilita inviata</text>
+        <graphics>
+          <offset x="550" y="510"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="537" y="456"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_controproposta_ricevuta">
+      <name>
+        <text>Controproposta ricevuta</text>
+        <graphics>
+          <offset x="2060" y="590"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2040" y="540"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_risposta_ricevuta">
+      <name>
+        <text>Risposta disponibilita ricevuta</text>
+        <graphics>
+          <offset x="750" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="730" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <place id="p_start">
+      <name>
+        <text>Inizio</text>
+        <graphics>
+          <offset x="50" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="30" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <initialMarking>
+        <text>1</text>
+      </initialMarking>
+    </place>
+    <place id="p_accordo">
+      <name>
+        <text>Accordo raggiunto</text>
+        <graphics>
+          <offset x="1720" y="390"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1700" y="340"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+    </place>
+    <transition id="t_inizio">
+      <name>
+        <text>Inizio processo</text>
+        <graphics>
+          <offset x="140" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="120" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_annullamento">
+      <name>
+        <text>Ricevi annullamento</text>
+        <graphics>
+          <offset x="1940" y="770"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1920" y="720"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_tipo_proposta_ricevuta">
+      <name>
+        <text>Tipo di risposta: Proposta ricevuta</text>
+        <graphics>
+          <offset x="910" y="390"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="890" y="340"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_invia_lista">
+      <name>
+        <text>Invia lista disponibilita</text>
+        <graphics>
+          <offset x="430" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="407" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_invia_controproposta">
+      <name>
+        <text>Invia controproposta</text>
+        <graphics>
+          <offset x="1470" y="390"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1450" y="340"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_valuta_controproposta_catch">
+      <name>
+        <text>VALUTA_CONTROPROPOSTA (catch)</text>
+        <graphics>
+          <offset x="2060" y="430"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2040" y="380"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_invia_nuova_proposta">
+      <name>
+        <text>Invia nuova proposta</text>
+        <graphics>
+          <offset x="1020" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1000" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_accettazione">
+      <name>
+        <text>Ricevi accettazione</text>
+        <graphics>
+          <offset x="1960" y="390"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1940" y="340"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_comunica_esito">
+      <name>
+        <text>Comunica esito manutenzione</text>
+        <graphics>
+          <offset x="2120" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2100" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_accetta_proposta">
+      <name>
+        <text>Accetta proposta</text>
+        <graphics>
+          <offset x="1470" y="250"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1450" y="200"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_valuta_data">
+      <name>
+        <text>Valuta data proposta</text>
+        <graphics>
+          <offset x="1100" y="330"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1080" y="280"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_risposta">
+      <name>
+        <text>Ricevi risposta disponibilita</text>
+        <graphics>
+          <offset x="670" y="520"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="649" y="462"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_esegui_manutenzione">
+      <name>
+        <text>Esegui manutenzione barca</text>
+        <graphics>
+          <offset x="1920" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1900" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_valuta_controproposta_throw">
+      <name>
+        <text>VALUTA_CONTROPROPOSTA (throw)</text>
+        <graphics>
+          <offset x="2160" y="590"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2140" y="540"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_manutenzione_no">
+      <name>
+        <text>Manutenzione avvenuta con successo (No)</text>
+        <graphics>
+          <offset x="2270" y="100"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2250" y="51"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_fine">
+      <name>
+        <text>Fine processo</text>
+        <graphics>
+          <offset x="2820" y="650"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2800" y="600"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_annullato_si">
+      <name>
+        <text>Appuntamento annullato (Si)</text>
+        <graphics>
+          <offset x="820" y="670"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="800" y="620"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_ricevi_controproposta">
+      <name>
+        <text>Ricevi controproposta</text>
+        <graphics>
+          <offset x="1960" y="590"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="1940" y="540"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <transition id="t_comunica_luogo">
+      <name>
+        <text>Comunica luogo appuntamento</text>
+        <graphics>
+          <offset x="2420" y="490"/>
+        </graphics>
+      </name>
+      <graphics>
+        <position x="2400" y="440"/>
+        <dimension x="40" y="40"/>
+      </graphics>
+      <toolspecific tool="WoPeD" version="1.0">
+        <time>0</time>
+        <timeUnit>1</timeUnit>
+        <orientation>1</orientation>
+      </toolspecific>
+    </transition>
+    <arc id="a11" source="t_tipo_proposta_ricevuta" target="p_proposta_da_valutare">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a33" source="t_valuta_controproposta_throw" target="p_link_controproposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a10" source="t_annullato_si" target="p_pre_fine">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a32" source="p_controproposta_ricevuta" target="t_valuta_controproposta_throw">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a13" source="p_proposta_da_valutare" target="t_valuta_data">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a35" source="t_valuta_controproposta_catch" target="p_proposta_da_valutare">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a12" source="t_invia_nuova_proposta" target="p_attesa_bob">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a34" source="p_link_controproposta" target="t_valuta_controproposta_catch">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a15" source="p_proposta_valutata" target="t_accetta_proposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a37" source="p_pre_fine" target="t_fine">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a14" source="t_valuta_data" target="p_proposta_valutata">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a36" source="t_ricevi_annullamento" target="p_pre_fine">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a17" source="t_accetta_proposta" target="p_accordo">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a16" source="p_proposta_valutata" target="t_invia_controproposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a38" source="t_fine" target="p_end">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a19" source="p_accordo" target="t_esegui_manutenzione">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a18" source="t_invia_controproposta" target="p_attesa_bob">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a20" source="t_esegui_manutenzione" target="p_manutenzione_eseguita">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a22" source="t_comunica_esito" target="p_esito_comunicato">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a21" source="p_manutenzione_eseguita" target="t_comunica_esito">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a24" source="p_esito_comunicato" target="t_manutenzione_no">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a23" source="p_esito_comunicato" target="t_comunica_luogo">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a26" source="t_manutenzione_no" target="p_disp_pronta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a25" source="t_comunica_luogo" target="p_pre_fine">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a28" source="p_attesa_bob" target="t_ricevi_controproposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a27" source="p_attesa_bob" target="t_ricevi_accettazione">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a29" source="p_attesa_bob" target="t_ricevi_annullamento">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a1" source="p_start" target="t_inizio">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a2" source="t_inizio" target="p_disp_pronta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a3" source="p_disp_pronta" target="t_invia_lista">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a4" source="t_invia_lista" target="p_lista_inviata">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a5" source="p_lista_inviata" target="t_ricevi_risposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a6" source="t_ricevi_risposta" target="p_risposta_ricevuta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a7" source="p_risposta_ricevuta" target="t_annullato_si">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a8" source="p_risposta_ricevuta" target="t_tipo_proposta_ricevuta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a9" source="p_risposta_ricevuta" target="t_invia_nuova_proposta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a31" source="t_ricevi_controproposta" target="p_controproposta_ricevuta">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <arc id="a30" source="t_ricevi_accettazione" target="p_accordo">
+      <inscription>
+        <text>1</text>
+        <graphics>
+          <offset x="500.0" y="-12.0"/>
+        </graphics>
+      </inscription>
+      <graphics/>
+      <toolspecific tool="WoPeD" version="1.0">
+        <probability>1.0</probability>
+        <displayProbabilityOn>false</displayProbabilityOn>
+        <displayProbabilityPosition x="500.0" y="12.0"/>
+      </toolspecific>
+    </arc>
+    <toolspecific tool="WoPeD" version="3.9.2">
+      <bounds>
+        <position x="2" y="25"/>
+        <dimension x="1895" y="740"/>
+      </bounds>
+      <scale>50</scale>
+      <treeWidthRight>1600</treeWidthRight>
+      <overviewPanelVisible>true</overviewPanelVisible>
+      <treeHeightOverview>100</treeHeightOverview>
+      <treePanelVisible>true</treePanelVisible>
+      <verticalLayout>false</verticalLayout>
+      <resources/>
+      <simulations/>
+      <partnerLinks/>
+      <variables/>
+    </toolspecific>
+  </net>
+</pnml>
