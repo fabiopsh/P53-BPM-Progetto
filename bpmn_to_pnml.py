@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Convertitore BPMN (orchestration, singolo pool) -> rete di workflow in formato
-PNML compatibile con WoPeD.
+Convertitore BPMN (orchestration a singolo pool, o collaboration a piu' pool
+con message flow) -> rete di workflow in formato PNML compatibile con WoPeD.
 
 Regole di traduzione (derivate e validate confrontando l'output con
 Petri Nets/alex.pnml, gia' modellata a mano da Fabio in WoPeD):
@@ -24,6 +24,14 @@ Petri Nets/alex.pnml, gia' modellata a mano da Fabio in WoPeD):
   (1 posto in ingresso, 1 in uscita) che materializza esplicitamente quel
   ramo, esattamente come fatto a mano da Fabio per alex.pnml
   (es. "t_manutenzione_no", "t_annullato_si", "t_tipo_proposta_ricevuta").
+  NOTA IMPORTANTE: questa e' la cosa che fa la differenza rispetto a un
+  convertitore "naive" (es. il tool esterno usato per generare la vecchia
+  PetriNet/collaboration.pnml): un gateway XOR con N uscite NON diventa mai
+  una singola transizione con N archi in uscita (quello sarebbe un AND-split
+  mascherato: scattando metterebbe un token su OGNI ramo insieme, invece che
+  su uno solo). Qui invece resta un posto condiviso con N transizioni "hard"
+  alternative collegate ad esso: solo una puo' scattare per volta, il che e'
+  la corretta semantica "scelta libera" (free-choice) di un XOR.
 - Un arco diretto hard->hard (nessun gateway in mezzo) genera comunque un
   posto "banale" (un posto per quell'arco).
 - startEvent: gli viene anteposto un posto iniziale univoco (marcatura 1).
@@ -31,9 +39,27 @@ Petri Nets/alex.pnml, gia' modellata a mano da Fabio in WoPeD):
 - Gli intermediate link event (throw/catch con lo stesso nome, usati per i
   loop-back "a goto") vengono accoppiati per nome e trattati come un arco
   hard->hard implicito (non essendoci un vero sequenceFlow tra i due).
+- Collaboration con piu' <bpmn:process> (piu' pool): ogni processo viene
+  tradotto separatamente (con un prefisso di id univoco per pool, derivato
+  dal nome del participant), poi le sotto-reti vengono unite in un'unica
+  rete di workflow con:
+    * un posto/transizione di "avvio collaborazione" che marca con un
+      unico token iniziale l'inizio di TUTTI i pool contemporaneamente
+      (una vera rete di workflow deve avere un solo posto sorgente);
+    * un posto/transizione di "fine collaborazione" (AND-join) raggiunto
+      solo quando OGNI pool ha raggiunto il proprio end event (un solo
+      posto pozzo finale);
+    * un posto per ogni bpmn:messageFlow, che collega la transizione del
+      nodo mittente (sendTask/throwEvent, nel suo pool) alla transizione
+      del nodo destinatario (receiveTask/catchEvent, nell'altro pool) --
+      stesso pattern gia' usato correttamente per gli archi hard->hard
+      dentro un singolo pool, solo attraverso il confine fra i due pool.
 
 Uso:
     python3 bpmn_to_pnml.py alex.bpmn alex_gen.pnml "Alex - Rete di Petri (generata)"
+    python3 bpmn_to_pnml.py collaboration.bpmn collab_gen.pnml "Collaboration - Rete di Petri (generata)"
+(la seconda forma viene rilevata automaticamente quando il file contiene
+piu' di un <bpmn:process>: non serve alcuna opzione in piu'.)
 """
 import sys
 import xml.etree.ElementTree as ET
@@ -67,18 +93,27 @@ def slug(text, fallback):
 
 
 class BpmnProcess:
-    def __init__(self, bpmn_path):
-        self.tree = ET.parse(bpmn_path)
-        self.root = self.tree.getroot()
-        proc = self.root.find(".//bpmn:process", NS)
-        if proc is None:
-            raise ValueError("Nessun <bpmn:process> trovato in " + bpmn_path)
-        self.process = proc
+    def __init__(self, process_el):
+        """process_el: l'elemento <bpmn:process> gia' individuato dal
+        chiamante (cosi' la stessa classe funziona sia per un file a
+        singolo pool sia per un file di collaboration con piu' pool)."""
+        self.process = process_el
         self.nodes = {}       # id -> {tag, name, kind}
         self.out_edges = {}   # id -> [(target_id, flow_name)]
         self.in_edges = {}    # id -> [(source_id, flow_name)]
         self._parse()
         self._pair_link_events()
+
+    @classmethod
+    def from_file(cls, bpmn_path):
+        """Comportamento originale: apre il file e prende il PRIMO
+        <bpmn:process> trovato (va bene per un BPMN a singolo pool)."""
+        tree = ET.parse(bpmn_path)
+        root = tree.getroot()
+        proc = root.find(".//bpmn:process", NS)
+        if proc is None:
+            raise ValueError("Nessun <bpmn:process> trovato in " + bpmn_path)
+        return cls(proc)
 
     def _parse(self):
         for el in self.process.iter():
@@ -585,10 +620,306 @@ def write_pnml(nb, out_path, net_id, net_name):
 
 
 def convert(bpmn_path, out_path, net_name, prefix="", net_id="PetriNet"):
-    proc = BpmnProcess(bpmn_path)
+    proc = BpmnProcess.from_file(bpmn_path)
     nb = NetBuilder(proc, prefix=prefix).build()
     write_pnml(nb, out_path, net_id, net_name)
     return nb
+
+
+class CombinedNet:
+    """Contenitore 'finto NetBuilder' che espone la stessa interfaccia
+    (places/transitions/arcs/initial_place/prefix) cosi' write_pnml() puo'
+    essere riusato identico anche per una collaboration a piu' pool."""
+
+    def __init__(self):
+        self.places = {}
+        self.transitions = {}
+        self.arcs = []
+        self.initial_place = None
+        self.final_places = []
+        self.prefix = ""
+        self._ids = set()
+
+    def _uid(self, base):
+        cand = base
+        i = 2
+        while cand in self._ids:
+            cand = base + "_" + str(i)
+            i += 1
+        self._ids.add(cand)
+        return cand
+
+    def new_place(self, base_label):
+        pid = self._uid("p_" + slug(base_label, "x"))
+        self.places[pid] = base_label
+        return pid
+
+    def new_transition(self, base_label):
+        tid = self._uid("t_" + slug(base_label, "x"))
+        self.transitions[tid] = base_label
+        return tid
+
+    def absorb(self, nb):
+        """Importa posti/transizioni/archi di una sotto-rete (gia' con id
+        prefissati per pool, quindi senza collisioni) cosi' come sono."""
+        self.places.update(nb.places)
+        self.transitions.update(nb.transitions)
+        self.arcs.extend(nb.arcs)
+        self._ids.update(nb.places.keys())
+        self._ids.update(nb.transitions.keys())
+
+
+def convert_collaboration(bpmn_path, out_path, net_name, net_id="PetriNet"):
+    """Traduce un file BPMN di collaboration (piu' <bpmn:process>, uniti da
+    <bpmn:messageFlow>) in un'unica rete di workflow PNML. Ogni pool viene
+    tradotto con le stesse regole free-choice del caso a singolo pool
+    (vedi NetBuilder), poi le sotto-reti sono unite aggiungendo:
+    un solo posto/transizione di avvio, uno di fine (AND-join su tutti i
+    pool), e un posto per ogni messageFlow fra un pool e l'altro."""
+    tree = ET.parse(bpmn_path)
+    root = tree.getroot()
+    collab_el = root.find("bpmn:collaboration", NS)
+    proc_els = root.findall("bpmn:process", NS)
+
+    if len(proc_els) < 2 or collab_el is None:
+        # non e' davvero una collaboration multi-pool: usa il percorso classico
+        return convert(bpmn_path, out_path, net_name, net_id=net_id)
+
+    # nome del participant (per un prefisso di id leggibile) per ogni processRef
+    proc_id_to_pname = {}
+    for part in collab_el.findall("bpmn:participant", NS):
+        pref = part.get("processRef")
+        if pref:
+            proc_id_to_pname[pref] = part.get("name") or pref
+
+    message_flows = [
+        (mf.get("id"), mf.get("sourceRef"), mf.get("targetRef"))
+        for mf in collab_el.findall("bpmn:messageFlow", NS)
+    ]
+
+    combined = CombinedNet()
+    node_to_transition_global = {}   # id nodo BPMN (di qualunque pool) -> id transizione interna
+    sub_builders = []
+    used_prefixes = set()
+
+    for proc_el in proc_els:
+        pid = proc_el.get("id")
+        pname = proc_id_to_pname.get(pid, pid)
+        base_prefix = slug(pname, pid) + "_"
+        prefix = base_prefix
+        i = 2
+        while prefix in used_prefixes:
+            prefix = base_prefix.rstrip("_") + str(i) + "_"
+            i += 1
+        used_prefixes.add(prefix)
+
+        proc = BpmnProcess(proc_el)
+        nb = NetBuilder(proc, prefix=prefix).build()
+        sub_builders.append((pname, nb))
+        combined.absorb(nb)
+        node_to_transition_global.update(nb.node_to_transition)
+
+    # --- avvio unico: un solo posto sorgente marcato, che alimenta lo
+    #     start event di OGNI pool nello stesso istante logico ---
+    start_place = combined.new_place("Avvio collaborazione")
+    start_trans = combined.new_transition("Avvia collaborazione")
+    combined.arcs.append((start_place, start_trans))
+    for pname, nb in sub_builders:
+        combined.arcs.append((start_trans, nb.initial_place))
+    combined.initial_place = start_place
+
+    # --- fine unica: un solo posto pozzo, raggiunto solo quando OGNI pool
+    #     ha raggiunto il proprio end event (AND-join) ---
+    end_trans = combined.new_transition("Fine collaborazione")
+    for pname, nb in sub_builders:
+        for fp in nb.final_places:
+            combined.arcs.append((fp, end_trans))
+    end_place = combined.new_place("Fine collaborazione")
+    combined.arcs.append((end_trans, end_place))
+    combined.final_places.append(end_place)
+
+    # --- un posto per ogni DESTINATARIO di messageFlow (non uno per ogni
+    #     messageFlow!): se piu' messageFlow diversi convergono sullo stesso
+    #     evento di catch (caso tipico: un catch "generico" che puo' ricevere
+    #     uno fra piu' tipi di messaggio alternativi, es. "Ricevi risposta
+    #     disponibilita'" che puo' arrivare da 3 send diversi a seconda di
+    #     come l'altra parte ha risposto), devono condividere UN SOLO posto
+    #     "e' arrivato un messaggio", alimentato da piu' mittenti alternativi.
+    #     Se si creasse un posto per ogni singolo messageFlow e li si desse
+    #     TUTTI in ingresso alla stessa transizione di catch, la si
+    #     costringerebbe ad aspettare TUTTI i messaggi insieme invece che
+    #     uno qualsiasi: esattamente lo stesso tipo di errore (AND al posto
+    #     di scelta libera) diagnosticato nel vecchio PetriNet/collaboration.pnml
+    #     per i gateway XOR. ---
+    missing = []
+    by_target = {}
+    for mf_id, src, tgt in message_flows:
+        by_target.setdefault(tgt, []).append((mf_id, src))
+
+    for tgt, senders in by_target.items():
+        tgt_t = node_to_transition_global.get(tgt)
+        if tgt_t is None:
+            for mf_id, src in senders:
+                missing.append((mf_id, src, tgt))
+            continue
+        tgt_label = combined.transitions.get(tgt_t, tgt)
+        src_transitions = []
+        for mf_id, src in senders:
+            src_t = node_to_transition_global.get(src)
+            if src_t is None:
+                missing.append((mf_id, src, tgt))
+                continue
+            if src_t not in src_transitions:
+                src_transitions.append(src_t)
+        if not src_transitions:
+            continue
+        src_labels = " / ".join(dict.fromkeys(combined.transitions.get(t, t) for t in src_transitions))
+        label = "Msg a '" + tgt_label + "' da: " + src_labels
+        mp = combined.new_place(label)
+        for src_t in src_transitions:
+            combined.arcs.append((src_t, mp))
+        combined.arcs.append((mp, tgt_t))
+
+    if missing:
+        for mf_id, src, tgt in missing:
+            print("ATTENZIONE: messageFlow " + mf_id + " (" + str(src) + " -> " + str(tgt)
+                  + ") non collegato: sorgente o destinazione non e' un nodo 'hard' tradotto.")
+
+    _fix_ricevi_risposta_disponibilita_correlation(combined, node_to_transition_global)
+
+    write_pnml(combined, out_path, net_id, net_name)
+    return combined
+
+
+def _fix_ricevi_risposta_disponibilita_correlation(combined, node_to_transition_global):
+    """Correzione manuale mirata (richiede conoscenza di dominio non
+    deducibile dal solo diagramma di controllo BPMN).
+
+    L'evento di catch 'Ricevi risposta disponibilitá' (Event_0l4idya, pool
+    Alex) riceve 3 messageFlow alternativi da Bob (Proponi data e tipologia
+    attrezzatura / Delega scelta / Comunica indisponibilitá), tutti verso lo
+    stesso catch event. Il gateway XOR subito dopo (Gateway_0537l1d
+    "Appuntamento annullato?" + Gateway_1r5qul7 "Tipo di risposta?", fusi
+    dalla traduzione standard in un unico posto condiviso con 3 transizioni
+    alternative) NELLA REALTA' del processo instrada in modo deterministico
+    in base a quale messaggio e' arrivato:
+        Comunica indisponibilitá  -> "Annullato? = Si" (fine)
+        Proponi data ...          -> "Proposta ricevuta"
+        Delega scelta             -> "Scelta delegata" (Invia nuova proposta)
+    Una rete P/T "piatta" (senza colori/dati) non puo' rappresentare questa
+    correlazione se i 3 messaggi confluiscono in un unico posto "arrivato un
+    messaggio": il gateway a valle diventa una scelta libera che ammette
+    ANCHE le combinazioni sbagliate (es. indisponibilitá trattata come
+    proposta ricevuta), generando esecuzioni spurie che il processo reale
+    non permette mai. Questo e' esattamente cio' che l'analisi di soundness
+    segnala come 3 posti non limitati.
+
+    Fix: si "sdoppia" (unfolding) il segmento catch+gateway in 3 varianti
+    dedicate, una per mittente, ciascuna con IN il proprio posto-messaggio
+    dedicato e OUT forzato verso il SOLO ramo corretto per quel mittente. Il
+    vecchio catch condiviso e il vecchio posto-gateway condiviso vengono
+    rimossi, cosi' la combinazione sbagliata non e' piu' rappresentabile.
+
+    Se in futuro il BPMN dovesse cambiare struttura, questa funzione fallisce
+    silenziosamente (con un avviso) invece di applicare una correzione
+    sbagliata: chi la mantiene deve aggiornarla a mano insieme al diagramma.
+    """
+    CATCH_ID = "Event_0l4idya"
+    SENDER_INDISPONIBILE = "Activity_1u6e7jx"    # Comunica indisponibilitá
+    SENDER_PROPOSTA = "Activity_0kkgc07"          # Proponi data e tipologia attrezzatura
+    SENDER_DELEGA = "Activity_0jpe9cp"            # Delega scelta
+    SCELTA_DELEGATA_TARGET = "Activity_1hac249"   # Invia nuova proposta
+
+    old_catch_t = node_to_transition_global.get(CATCH_ID)
+    sender_t = {
+        "indisponibile": node_to_transition_global.get(SENDER_INDISPONIBILE),
+        "proposta": node_to_transition_global.get(SENDER_PROPOSTA),
+        "delega": node_to_transition_global.get(SENDER_DELEGA),
+    }
+    delega_target_t = node_to_transition_global.get(SCELTA_DELEGATA_TARGET)
+
+    if old_catch_t is None or delega_target_t is None or any(v is None for v in sender_t.values()):
+        print("ATTENZIONE: _fix_ricevi_risposta_disponibilita_correlation: id BPMN attesi "
+              "non trovati, correzione NON applicata (il diagramma potrebbe essere cambiato).")
+        return
+
+    old_ins = [s for s, t in combined.arcs if t == old_catch_t]
+    old_outs = [t for s, t in combined.arcs if s == old_catch_t]
+    if len(old_outs) != 1 or len(old_ins) != 2:
+        print("ATTENZIONE: struttura del catch diversa da quella attesa, correzione NON applicata.")
+        return
+    shared_gateway_place = old_outs[0]
+
+    expected_senders = set(sender_t.values())
+    old_msg_place = None
+    control_place = None
+    for p in old_ins:
+        producers = {s for s, t in combined.arcs if t == p}
+        if producers == expected_senders:
+            old_msg_place = p
+        else:
+            control_place = p
+    if old_msg_place is None or control_place is None:
+        print("ATTENZIONE: posti in ingresso al catch diversi da quelli attesi, correzione NON applicata.")
+        return
+
+    downstream = [t for s, t in combined.arcs if s == shared_gateway_place]
+
+    def branch_by_label(substr):
+        for t in downstream:
+            if substr in combined.transitions.get(t, ""):
+                return t
+        return None
+
+    si_branch_t = branch_by_label("annullato? (Si)")
+    proposta_branch_t = branch_by_label("Proposta ricevuta")
+    if si_branch_t is None or proposta_branch_t is None or delega_target_t not in downstream:
+        print("ATTENZIONE: rami del gateway diversi da quelli attesi, correzione NON applicata.")
+        return
+
+    si_out = [t for s, t in combined.arcs if s == si_branch_t]
+    proposta_out = [t for s, t in combined.arcs if s == proposta_branch_t]
+
+    # --- rimuovi il vecchio catch condiviso, il vecchio posto-gateway
+    #     condiviso, i vecchi rami "Annullato (Si)"/"Proposta ricevuta" (ormai
+    #     sostituiti dalle 3 varianti dedicate) e TUTTI i loro archi (sia in
+    #     ingresso sia in uscita: una transizione lasciata senza posti in
+    #     ingresso scatterebbe all'infinito senza precondizioni, generando
+    #     token dal nulla) ---
+    obsolete_trans = {si_branch_t, proposta_branch_t} - {delega_target_t}
+    combined.arcs = [
+        (s, t) for s, t in combined.arcs
+        if s != old_catch_t and t != old_catch_t
+        and s != shared_gateway_place
+        and s != old_msg_place and t != old_msg_place
+        and s not in obsolete_trans and t not in obsolete_trans
+    ]
+    del combined.transitions[old_catch_t]
+    del combined.places[old_msg_place]
+    del combined.places[shared_gateway_place]
+    for t in obsolete_trans:
+        del combined.transitions[t]
+
+    # --- crea le 3 varianti dedicate, ciascuna forzata sul ramo corretto ---
+    for tag, out_places in (("indisponibile", si_out), ("proposta", proposta_out)):
+        st = sender_t[tag]
+        mp = combined.new_place("Msg (" + tag + "): Ricevi risposta disponibilitá")
+        combined.arcs.append((st, mp))
+        vt = combined.new_transition("Ricevi risposta disponibilitá (" + tag + ")")
+        combined.arcs.append((control_place, vt))
+        combined.arcs.append((mp, vt))
+        for op in out_places:
+            combined.arcs.append((vt, op))
+
+    st = sender_t["delega"]
+    mp = combined.new_place("Msg (delega): Ricevi risposta disponibilitá")
+    combined.arcs.append((st, mp))
+    vt = combined.new_transition("Ricevi risposta disponibilitá (delega)")
+    combined.arcs.append((control_place, vt))
+    combined.arcs.append((mp, vt))
+    dp = combined.new_place("Scelta delegata confermata")
+    combined.arcs.append((vt, dp))
+    combined.arcs.append((dp, delega_target_t))
 
 
 if __name__ == "__main__":
@@ -599,5 +930,11 @@ if __name__ == "__main__":
     out_path = sys.argv[2]
     net_name = sys.argv[3] if len(sys.argv) > 3 else "Rete generata"
     prefix = sys.argv[4] if len(sys.argv) > 4 else ""
-    nb = convert(bpmn_path, out_path, net_name, prefix=prefix)
+
+    _tree = ET.parse(bpmn_path)
+    _n_proc = len(_tree.getroot().findall("bpmn:process", NS))
+    if _n_proc >= 2:
+        nb = convert_collaboration(bpmn_path, out_path, net_name)
+    else:
+        nb = convert(bpmn_path, out_path, net_name, prefix=prefix)
     print("Posti: " + str(len(nb.places)) + "  Transizioni: " + str(len(nb.transitions)) + "  Archi: " + str(len(nb.arcs)))
