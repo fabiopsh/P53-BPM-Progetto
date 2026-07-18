@@ -4,9 +4,9 @@
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{graphicx}
-\usepackage{pdflscape}
 \usepackage{float}
 \usepackage{caption}
+\captionsetup{font=small,labelfont=bf,margin=1cm,justification=centering}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
 \usepackage{xcolor}
@@ -18,6 +18,17 @@
 \newcommand{\preset}[1]{{}^{\bullet}#1}
 \newcommand{\postset}[1]{#1^{\bullet}}
 \newcommand{\net}{\ensuremath{N}}
+
+% ------- figura larga, forzata a occupare tutta la larghezza del testo -------
+% #1 = percorso immagine, #2 = didascalia, #3 = label
+\newcommand{\figuralarga}[3]{%
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{#1}
+		\caption{#2}
+		\label{#3}
+	\end{figure}%
+}
 
 \begin{document}
 
@@ -100,6 +111,8 @@ Alex esegue la manutenzione della barca, comunica l'esito e, con lo split XOR
 termina, oppure ricomincia la negoziazione inviando nuovamente la lista. Il
 diagramma \`e mostrato in Fig.~\ref{fig:bpmn-alex}.
 
+\figuralarga{../BPMN/img/alex.png}{Diagramma BPMN del processo di Alex.}{fig:bpmn-alex}
+
 \subsection{Bob}
 Il processo di Bob inizia ricevendo la lista di disponibilit\`a
 (\textit{receive task} ``Ricevi lista disponibilit\`a''). Con uno split XOR
@@ -111,6 +124,8 @@ l'appuntamento. Raggiunto l'accordo, Bob riceve l'esito della manutenzione e, in
 ad esso, o riceve il luogo dell'appuntamento e termina, oppure ricomincia la
 negoziazione. Il diagramma \`e mostrato in Fig.~\ref{fig:bpmn-bob}.
 
+\figuralarga{../BPMN/img/bob.png}{Diagramma BPMN del processo di Bob.}{fig:bpmn-bob}
+
 \subsection{Collaboration}
 Il diagramma di collaboration (Fig.~\ref{fig:bpmn-collab}) unisce i due processi
 collegandoli con i message flow tra i corrispondenti send task ed eventi/receive task.
@@ -119,6 +134,8 @@ scenario \`e che i tre possibili messaggi iniziali di Bob (proposta, delega,
 indisponibilit\`a) confluiscono su un \emph{unico} intermediate catch event di Alex:
 questa scelta di modellazione richiede un trattamento particolare in fase di
 traduzione, discusso nella Sezione~\ref{sec:traduzione}.
+
+\figuralarga{../BPMN/img/collaboration.png}{Diagramma BPMN della collaboration tra Alex e Bob.}{fig:bpmn-collab}
 
 % =========================== 3. RETI DI WORKFLOW ===========================
 \section{Reti di workflow}
@@ -171,7 +188,8 @@ Complessivamente l'interfaccia del sistema \`e costituita dai dodici posti dei m
 flow e dai due posti di correlazione dell'esito.
 
 \subsection{Alex}
-La rete di workflow di Alex \`e mostrata in Fig.~\ref{fig:pn-alex}. Ha 28 posti,
+La rete di workflow di Alex \`e mostrata in Fig.~\ref{fig:pn-alex-1}--\ref{fig:pn-alex-2}
+(divisa in due parti per leggibilit\`a). Ha 28 posti,
 14 transizioni, 9 operatori e 56 archi. \`E una workflow net: esiste un solo posto
 iniziale $i$ con $\preset{i}=\emptyset$ e un solo posto finale $o$ con
 $\postset{o}=\emptyset$, e ogni nodo giace su un cammino da $i$ a $o$. La rete \`e
@@ -182,15 +200,23 @@ copertura $\net^{*}$ \`e bounded e live e ammette un T-invariante positivo. Poic
 la rete \`e safe, il grafo di raggiungibilit\`a \`e finito e coincide con il grafo di
 copertura: esso ha 28 vertici e 33 archi. La rete \`e \textbf{sound}.
 
+\figuralarga{../PetriNet/img/alex_1.png}{Rete di workflow del processo di Alex (parte 1 di 2).}{fig:pn-alex-1}
+\figuralarga{../PetriNet/img/alex_2.png}{Rete di workflow del processo di Alex (parte 2 di 2).}{fig:pn-alex-2}
+
 \subsection{Bob}
-La rete di workflow di Bob \`e mostrata in Fig.~\ref{fig:pn-bob}. Ha 30 posti,
+La rete di workflow di Bob \`e mostrata in Fig.~\ref{fig:pn-bob-1}--\ref{fig:pn-bob-2}
+(divisa in due parti per leggibilit\`a). Ha 30 posti,
 15 transizioni, 9 operatori e 59 archi. Valgono le stesse propriet\`a viste per Alex:
 \`e una workflow net safe, free-choice e well-structured, S-coverable (con 54
 S-component) e \textbf{sound}. Il grafo di raggiungibilit\`a coincide con quello di
 copertura e ha 30 vertici e 35 archi.
 
+\figuralarga{../PetriNet/img/bob_1.png}{Rete di workflow del processo di Bob (parte 1 di 2).}{fig:pn-bob-1}
+\figuralarga{../PetriNet/img/bob_2.png}{Rete di workflow del processo di Bob (parte 2 di 2).}{fig:pn-bob-2}
+
 \subsection{Collaboration (workflow system)}
-Il workflow system \`e mostrato in Fig.~\ref{fig:pn-collab}. Ha 72 posti,
+Il workflow system \`e mostrato in Fig.~\ref{fig:pn-collab-1}--\ref{fig:pn-collab-2}
+(diviso in due parti per leggibilit\`a). Ha 72 posti,
 37 transizioni, 14 operatori e 149 archi. La rete \`e una workflow net ed \`e
 \textbf{sound}, ma, a differenza dei singoli module, non \`e free-choice e non \`e
 well-structured.
@@ -208,6 +234,9 @@ well-structured.
 	controllo e di messaggio) che seguono cammini disgiunti e riconvergono a valle,
 	producendo un gran numero di handle.
 \end{itemize}
+
+\figuralarga{../PetriNet/img/collaboration_1.png}{Workflow system: collaboration tra Alex e Bob con i message flow (parte 1 di 2).}{fig:pn-collab-1}
+\figuralarga{../PetriNet/img/collaboration_2.png}{Workflow system: collaboration tra Alex e Bob con i message flow (parte 2 di 2).}{fig:pn-collab-2}
 
 Va sottolineato che free-choice e well-structuredness sono condizioni
 \emph{sufficienti}, non necessarie, per la soundness: la loro assenza non \`e un
@@ -246,51 +275,5 @@ il requisito richiesto dalla consegna per tutti i pool e per l'intero diagramma 
 collaborazione. Il trattamento accurato del catch unico a tre messaggi e la
 correlazione dell'esito della manutenzione sono stati determinanti per ottenere
 l'interazione corretta e la soundness del sistema.
-
-% =========================== FIGURE (landscape) ===========================
-\clearpage
-\begin{landscape}
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../BPMN/img/alex.png}
-		\caption{Diagramma BPMN del processo di Alex.}
-		\label{fig:bpmn-alex}
-	\end{figure}
-
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../BPMN/img/bob.png}
-		\caption{Diagramma BPMN del processo di Bob.}
-		\label{fig:bpmn-bob}
-	\end{figure}
-
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../BPMN/img/collaboration.png}
-		\caption{Diagramma BPMN della collaboration tra Alex e Bob.}
-		\label{fig:bpmn-collab}
-	\end{figure}
-
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../PetriNet/img/alex.pdf}
-		\caption{Rete di workflow del processo di Alex.}
-		\label{fig:pn-alex}
-	\end{figure}
-
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../PetriNet/img/bob.pdf}
-		\caption{Rete di workflow del processo di Bob.}
-		\label{fig:pn-bob}
-	\end{figure}
-
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{../PetriNet/img/collaboration.pdf}
-		\caption{Workflow system: collaboration tra Alex e Bob con i message flow.}
-		\label{fig:pn-collab}
-	\end{figure}
-\end{landscape}
 
 \end{document}
