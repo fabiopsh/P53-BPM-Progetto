@@ -85,8 +85,7 @@ successiva.
 Trattandosi di uno scenario con pi\`u attori che si scambiano messaggi, si \`e scelta
 la notazione BPMN, che permette di descrivere sia l'\emph{orchestration} dei singoli
 partecipanti sia la loro \emph{collaboration}. I diagrammi BPMN sono stati realizzati
-con Camunda Modeler; le reti di workflow sono state ottenute per traduzione dai
-diagrammi e analizzate con WoPeD. La relazione descrive i modelli prodotti, la
+con Camunda Modeler; le reti di workflow sono state ottenute per Alex e Bob tramite bpmn2petrinet.com e per la collaboration manualmente tramite WoPeD. La relazione descrive i modelli prodotti, la
 traduzione in reti di Petri e le propriet\`a delle workflow net risultanti.
 
 % =========================== 2. BPMN ===========================
@@ -98,31 +97,30 @@ comunicano tra loro nel diagramma di collaboration tramite \emph{message flow}.
 
 \subsection{Alex}
 Il processo di Alex inizia con l'invio della lista delle disponibilit\`a
-(\textit{send task} ``Invia lista disponibilit\`a''). Alex resta poi in attesa
+\textit{send task} ``Invia lista disponibilit\`a''. Alex resta poi in attesa
 della risposta di Bob con un unico \textit{intermediate catch event}
-(``Ricevi risposta disponibilit\`a''): in base al contenuto ricevuto (proposta,
+``Ricevi risposta disponibilit\`a'': in base al contenuto ricevuto (proposta,
 delega o indisponibilit\`a) uno split XOR indirizza il flusso sul ramo corretto.
 Se Bob ha proposto, Alex valuta la data e, con uno split XOR
-(``Proposta accettabile?''), accetta o invia una controproposta; se Bob ha delegato,
+``Proposta accettabile?'', accetta o invia una controproposta; se Bob ha delegato,
 Alex invia una nuova proposta. Dopo aver inviato una proposta, Alex attende la
-risposta di Bob (accettazione, controproposta o annullamento). Raggiunto l'accordo,
+risposta di Bob che puó essere: accettazione, controproposta o annullamento. Raggiunto l'accordo,
 Alex esegue la manutenzione della barca, comunica l'esito e, con lo split XOR
 ``Manutenzione avvenuta con successo?'', o comunica il luogo dell'appuntamento e
-termina, oppure ricomincia la negoziazione inviando nuovamente la lista. Il
-diagramma \`e mostrato in Fig.~\ref{fig:bpmn-alex}.
+termina, oppure ricomincia la negoziazione inviando nuovamente la lista.
 
 \figuralarga{../BPMN/img/alex.png}{Diagramma BPMN del processo di Alex.}{fig:bpmn-alex}
 
 \subsection{Bob}
 Il processo di Bob inizia ricevendo la lista di disponibilit\`a
-(\textit{receive task} ``Ricevi lista disponibilit\`a''). Con uno split XOR
-(``Come rispondo?'') Bob sceglie tra proporre data e attrezzatura, delegare la scelta
-ad Alex o comunicare l'indisponibilit\`a (che conclude il processo). Se propone o
+\textit{receive task} ``Ricevi lista disponibilit\`a''. Con uno split XOR
+ Bob sceglie tra proporre data e attrezzatura, delegare la scelta
+ad Alex o comunicare l'indisponibilit\`a che conclude il processo. Se propone o
 delega, Bob attende la risposta di Alex; alla ricezione valuta la proposta e, con lo
 split XOR ``Come rispondo?'', decide se accettare, fare una controproposta o annullare
 l'appuntamento. Raggiunto l'accordo, Bob riceve l'esito della manutenzione e, in base
 ad esso, o riceve il luogo dell'appuntamento e termina, oppure ricomincia la
-negoziazione. Il diagramma \`e mostrato in Fig.~\ref{fig:bpmn-bob}.
+negoziazione.
 
 \figuralarga{../BPMN/img/bob.png}{Diagramma BPMN del processo di Bob.}{fig:bpmn-bob}
 
@@ -130,8 +128,8 @@ negoziazione. Il diagramma \`e mostrato in Fig.~\ref{fig:bpmn-bob}.
 Il diagramma di collaboration (Fig.~\ref{fig:bpmn-collab}) unisce i due processi
 collegandoli con i message flow tra i corrispondenti send task ed eventi/receive task.
 Complessivamente sono presenti dodici message flow. Un aspetto peculiare dello
-scenario \`e che i tre possibili messaggi iniziali di Bob (proposta, delega,
-indisponibilit\`a) confluiscono su un \emph{unico} intermediate catch event di Alex:
+scenario \`e che i tre possibili messaggi iniziali di Bob che sono proposta, delega,
+indisponibilit\`a, confluiscono su un \emph{unico} intermediate catch event di Alex:
 questa scelta di modellazione richiede un trattamento particolare in fase di
 traduzione, discusso nella Sezione~\ref{sec:traduzione}.
 
@@ -153,13 +151,12 @@ I criteri di traduzione adottati sono i seguenti:
 	\item ogni task ed evento \`e stato trasformato in una transizione, e ogni arco
 	di sequence flow in un posto;
 	\item gli split e i join AND/XOR sono stati resi con operatori annotati con il
-	tipo corretto (lo ``zucchero sintattico'' di WoPeD), corrispondenti alla
+	tipo corretto, corrispondenti alla
 	opportuna combinazione di posti e transizioni;
 	\item sono stati aggiunti un unico posto iniziale e un unico posto finale,
 	collegati ai punti di start/end dei due module tramite transizioni, in modo da
 	ottenere un'unica workflow net anche per il sistema complessivo;
-	\item ogni message flow \`e stato tradotto in un \emph{posto di interfaccia}
-	(canale) che collega la transizione mittente a quella ricevente.
+	\item ogni message flow \`e stato tradotto in un \emph{posto di interfaccia} che collega la transizione mittente a quella ricevente.
 \end{itemize}
 
 Lo scenario presenta due punti che, tradotti in modo ingenuo, comprometterebbero la
@@ -178,7 +175,7 @@ percorso, garantendo la corretta interazione.
 
 \paragraph{Esito della manutenzione.} Alex comunica a Bob l'esito della manutenzione
 con un solo messaggio, dopodich\'e entrambi decidono, con uno split XOR indipendente,
-se procedere (manutenzione riuscita) o riaccordarsi (manutenzione fallita). Poich\'e la
+se procedere su manutenzione riuscita o riaccordarsi in caso di manutenzione fallita. Poich\'e la
 decisione \`e presa da Alex ma deve riflettersi anche sul ramo di Bob, le due scelte
 sono state correlate aggiungendo due posti di interfaccia (``esito OK'' ed ``esito
 KO''), prodotti dalla decisione di Alex e consumati dalle transizioni del ramo di Bob.
@@ -195,10 +192,9 @@ iniziale $i$ con $\preset{i}=\emptyset$ e un solo posto finale $o$ con
 $\postset{o}=\emptyset$, e ogni nodo giace su un cammino da $i$ a $o$. La rete \`e
 \emph{safe} (1-bounded) e \emph{free-choice}, ed \`e \emph{well-structured} (non
 presenta PT-handle n\'e TP-handle). \`E inoltre S-coverable, con 51 S-component
-distinte, dunque ammette un S-invariante positivo; essendo sound, la rete di
-copertura $\net^{*}$ \`e bounded e live e ammette un T-invariante positivo. Poich\'e
-la rete \`e safe, il grafo di raggiungibilit\`a \`e finito e coincide con il grafo di
-copertura: esso ha 28 vertici e 33 archi. La rete \`e \textbf{sound}.
+distinte, dunque ammette un S-invariante positivo; essendo sound, il coverability graph $\net^{*}$ \`e bounded e live e ammette un T-invariante positivo. Poich\'e
+la rete \`e safe, il reachability graph \`e finito e coincide con il coverability graph:
+ esso ha 28 vertici e 33 archi. La rete \`e \textbf{sound}.
 
 \figuralarga{../PetriNet/img/alex_1.png}{Rete di workflow del processo di Alex (parte 1 di 2).}{fig:pn-alex-1}
 \figuralarga{../PetriNet/img/alex_2.png}{Rete di workflow del processo di Alex (parte 2 di 2).}{fig:pn-alex-2}
@@ -208,8 +204,7 @@ La rete di workflow di Bob \`e mostrata in Fig.~\ref{fig:pn-bob-1}--\ref{fig:pn-
 (divisa in due parti per leggibilit\`a). Ha 30 posti,
 15 transizioni, 9 operatori e 59 archi. Valgono le stesse propriet\`a viste per Alex:
 \`e una workflow net safe, free-choice e well-structured, S-coverable (con 54
-S-component) e \textbf{sound}. Il grafo di raggiungibilit\`a coincide con quello di
-copertura e ha 30 vertici e 35 archi.
+S-component) e \textbf{sound}. Il reachability graph coincide con il coverability graph e ha 30 vertici e 35 archi.
 
 \figuralarga{../PetriNet/img/bob_1.png}{Rete di workflow del processo di Bob (parte 1 di 2).}{fig:pn-bob-1}
 \figuralarga{../PetriNet/img/bob_2.png}{Rete di workflow del processo di Bob (parte 2 di 2).}{fig:pn-bob-2}
@@ -224,13 +219,13 @@ well-structured.
 \begin{itemize}
 	\item \textbf{Non free-choice.} Sono presenti quattro gruppi di violazione del
 	free-choice, corrispondenti esattamente ai punti in cui un posto di interfaccia
-	(messaggio) fa da guardia su una transizione che ha anche altri posti nel
-	pre-set. Sono cio\`e i ``cancelli'' dei messaggi scambiati tra Alex e Bob: \`e
-	proprio la sincronizzazione tramite canali a rendere la rete non free-choice, e
+	fa da guardia su una transizione che ha anche altri posti nel
+	pre-set. Sono cio\`e i punti dove avvengono i 4 message flow scambiati tra Alex e Bob: \`e
+	proprio la sincronizzazione tramite message flow a rendere la rete non free-choice, e
 	non \`e eliminabile senza snaturare l'interazione.
 	\item \textbf{Non well-structured.} La rete presenta 120 PT-handle e 131
 	TP-handle. \`E un effetto atteso della composizione di due processi concorrenti
-	sincronizzati da canali: ogni transizione mittente genera due token (di
+	sincronizzati tramite message flow: ogni transizione mittente genera due token (di
 	controllo e di messaggio) che seguono cammini disgiunti e riconvergono a valle,
 	producendo un gran numero di handle.
 \end{itemize}
@@ -240,9 +235,9 @@ well-structured.
 
 Va sottolineato che free-choice e well-structuredness sono condizioni
 \emph{sufficienti}, non necessarie, per la soundness: la loro assenza non \`e un
-errore. La soundness del sistema \`e stata verificata direttamente sul grafo di
-raggiungibilit\`a, che ha 199 vertici e 340 archi. Poich\'e la rete \`e bounded, il
-grafo di raggiungibilit\`a \`e finito e coincide con il grafo di copertura; essendo
+errore. La soundness del sistema \`e stata verificata direttamente sul reachability graph
+che ha 199 vertici e 340 archi. Poich\'e la rete \`e bounded, il
+reachability graph \`e finito e coincide con il coverability graph; essendo
 sound, $\net^{*}$ \`e bounded e live e la rete \`e S-coverable, con conseguente
 esistenza di T-invarianti e S-invarianti positivi.
 
@@ -250,7 +245,7 @@ La Tab.~\ref{tab:metriche} riassume le metriche delle tre reti.
 
 \begin{table}[H]
 	\centering
-	\caption{Metriche strutturali e dimensione del grafo di raggiungibilit\`a (RG).}
+	\caption{Metriche strutturali e dimensione del reachability graph (RG).}
 	\label{tab:metriche}
 	\begin{tabular}{lcccccc}
 		\toprule
