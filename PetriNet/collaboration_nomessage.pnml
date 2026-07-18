@@ -4,7 +4,7 @@ Manual editing may break compatibility.-->
 <pnml>
   <net type="http://www.informatik.hu-berlin.de/top/pntd/ptNetb" id="PetriNet">
     <name>
-      <text>Collaboration - Rete di Petri (generata v4)</text>
+      <text>Collaboration - Rete di Petri</text>
     </name>
     <place id="p50">
       <name>

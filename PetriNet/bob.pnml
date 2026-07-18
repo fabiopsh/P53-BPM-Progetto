@@ -3,6 +3,9 @@
 Manual editing may break compatibility.-->
 <pnml>
   <net type="http://www.informatik.hu-berlin.de/top/pntd/ptNetb" id="">
+    <name>
+      <text>Bob - Rete di Petri</text>
+    </name>
     <place id="Flow_1rpwtsx">
       <name>
         <text>Accetto</text>
